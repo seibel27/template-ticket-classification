@@ -1,0 +1,186 @@
+{
+  "workspace": {
+    "name": "Workspace",
+    "language": "en",
+    "theme": null,
+    "logo_url": "./logo.png",
+    "favicon_url": "./favicon.ico",
+    "brand_name": "Abstra Project",
+    "main_color": null,
+    "font_family": null,
+    "font_color": null
+  },
+  "kanban": {
+    "access_control": {
+      "is_public": false,
+      "required_roles": []
+    }
+  },
+  "home": {
+    "access_control": {
+      "is_public": false,
+      "required_roles": []
+    }
+  },
+  "jobs": [],
+  "hooks": [
+    {
+      "id": "44921cc9-4476-4e2c-a99f-6547bdeab25c",
+      "file": "intercom_new_message.py",
+      "path": "receive-intercom-ticket",
+      "title": "Intercom New Message",
+      "enabled": true,
+      "workflow_position": [
+        -375,
+        -120
+      ],
+      "is_initial": true,
+      "transitions": [
+        {
+          "target_id": "496d0bf4-50e5-4228-8d9e-77575dc748d0",
+          "target_type": "scripts",
+          "type": "hooks:finished",
+          "id": "0kx4179",
+          "condition_value": null
+        }
+      ]
+    }
+  ],
+  "forms": [],
+  "scripts": [
+    {
+      "id": "496d0bf4-50e5-4228-8d9e-77575dc748d0",
+      "file": "classify_tickets.py",
+      "title": "Classify Tickets",
+      "is_initial": false,
+      "workflow_position": [
+        -315,
+        0
+      ],
+      "transitions": [
+        {
+          "target_id": "b65d5f87-cd6c-41d9-b190-8c9122ec9eeb",
+          "target_type": "conditions",
+          "type": "scripts:finished",
+          "id": "176v7go",
+          "condition_value": null
+        }
+      ]
+    },
+    {
+      "id": "0e162ab9-e338-48fa-8fe5-310a9ea60257",
+      "file": "classify_support_level.py",
+      "title": "Classify Support Level",
+      "is_initial": false,
+      "workflow_position": [
+        45,
+        135
+      ],
+      "transitions": [
+        {
+          "target_id": "78e6e4d1-ab57-448f-96c8-60ebb7e40f8c",
+          "target_type": "scripts",
+          "type": "scripts:finished",
+          "id": "l6vvaza",
+          "condition_value": null
+        }
+      ]
+    },
+    {
+      "id": "d4ca44ea-8e06-4968-92af-b45b659d6e9d",
+      "file": "create_deal_in_pipedrive.py",
+      "title": "Create Deal in Pipedrive",
+      "is_initial": false,
+      "workflow_position": [
+        -375,
+        315
+      ],
+      "transitions": []
+    },
+    {
+      "id": "7063e157-96e6-47ba-a864-a8f814ab1d9c",
+      "file": "add_finance_tickets_to_erp.py",
+      "title": "Add Finance Tickets to ERP",
+      "is_initial": false,
+      "workflow_position": [
+        -30,
+        315
+      ],
+      "transitions": []
+    },
+    {
+      "id": "78e6e4d1-ab57-448f-96c8-60ebb7e40f8c",
+      "file": "convert_conversation_to_ticket.py",
+      "title": "Convert Conversation to Ticket",
+      "is_initial": false,
+      "workflow_position": [
+        390,
+        135
+      ],
+      "transitions": [
+        {
+          "target_id": "762996b0-0d85-4413-9844-17f8b609541d",
+          "target_type": "scripts",
+          "type": "scripts:finished",
+          "id": "4zo3lrj",
+          "condition_value": null
+        }
+      ]
+    },
+    {
+      "id": "762996b0-0d85-4413-9844-17f8b609541d",
+      "file": "send_conversation_to_slack.py",
+      "title": "Send Conversation to Slack",
+      "is_initial": false,
+      "workflow_position": [
+        780,
+        135
+      ],
+      "transitions": []
+    }
+  ],
+  "iterators": [],
+  "conditions": [
+    {
+      "id": "b65d5f87-cd6c-41d9-b190-8c9122ec9eeb",
+      "variable_name": "area",
+      "workflow_position": [
+        -210,
+        135
+      ],
+      "transitions": [
+        {
+          "target_id": "0e162ab9-e338-48fa-8fe5-310a9ea60257",
+          "target_type": "scripts",
+          "type": "conditions:patternMatched",
+          "id": "wa9pv41",
+          "condition_value": "Support"
+        },
+        {
+          "target_id": "7063e157-96e6-47ba-a864-a8f814ab1d9c",
+          "target_type": "scripts",
+          "type": "conditions:patternMatched",
+          "id": "wqhra3c",
+          "condition_value": "Finance"
+        },
+        {
+          "target_id": "d4ca44ea-8e06-4968-92af-b45b659d6e9d",
+          "target_type": "scripts",
+          "type": "conditions:patternMatched",
+          "id": "txgyifj",
+          "condition_value": "Sales"
+        }
+      ]
+    },
+    {
+      "id": "56759c0a-9f24-4b1b-9d27-32e229dcd797",
+      "variable_name": "topic",
+      "workflow_position": [
+        1455,
+        -405
+      ],
+      "transitions": []
+    }
+  ],
+  "version": "11.0"
+}

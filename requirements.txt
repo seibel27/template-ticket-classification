@@ -1,0 +1,3 @@
+abstra==2.26.3
+abstra_crm @ git+https://github.com/abstra-app/abstra_crm.git
+requests==2.31.0
