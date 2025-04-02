@@ -10,7 +10,7 @@ This project automates the classification of customer tickets into different are
 
 To customize this template for your team and build a lot more, <a href="https://meet.abstra.app/demo?url=template-ticket-classification" target="_blank">book a demonstration here</a>.
 
-![image](https://github.com/user-attachments/assets/431ff591-c256-4627-a169-ca30496ae5fe)
+![image](https://github.com/user-attachments/assets/fad5d7cd-0dcd-4a05-91e5-9da24e626841)
 
 
 ## Initial Configuration
