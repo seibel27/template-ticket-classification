@@ -28,3 +28,6 @@ payload_json = {
 response = requests.post(url, headers=headers, json=payload_json)
 
 print(response.json())
+
+send_task("ticket", payload)
+task.complete()
