@@ -1,7 +1,9 @@
-import abstra.workflows as aw
+from abstra.tasks import get_trigger_task
 import os
 import requests
 
+task = get_trigger_task()
+payload = task.get_payload()
 
 API_TOKEN = os.getenv("SLACK_BOT_TOKEN")
 
@@ -21,14 +23,9 @@ def send_message(msg: str, channel):
     requests.post(url, json=data, headers=headers)
 
 
-level = aw.get_data("level")
-conversation_info = aw.get_data("conversation")
+level = payload["level"]
+conversation_info = payload["conversation_info"]
 
-level = "N1"
-conversation_info = {
-    "priority": "High",
-    "message": "I need help with my account"
-}
 
 message = f"""
 A new support ticket has been created with the following information:
@@ -39,3 +36,5 @@ A new support ticket has been created with the following information:
 """
 
 send_message(message, slack_channels[level])
+
+task.complete()

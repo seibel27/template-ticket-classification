@@ -1,7 +1,10 @@
-import abstra.workflows as aw
+from abstra.tasks import get_trigger_task, send_task
 from abstra.ai import prompt
 
-message = aw.get_data("conversation")["message"]
+task = get_trigger_task()
+payload = task.get_payload()
+conversation_info = payload["conversation_info"]
+message = conversation_info["message"]
 
 categories = [
     {
@@ -26,5 +29,14 @@ ans = prompt(f"""You are a member of the support team. You have received a messa
                 "priority": {"type": "string", "description": "The priority of the message"}
             })
 
-aw.set_data('area', ans['area'].capitalize())
-aw.set_data('priority', ans['priority'].capitalize())
+payload["area"] = ans['area'].capitalize()
+payload["priority"] = ans['priority'].capitalize()
+
+# Classifying by area
+areas_list = "Support,Finance,Sales".split(",")
+area = ans['area'].capitalize()
+for areas in areas_list:
+    if area is not None and area == areas:
+        send_task(area, payload)
+
+task.complete()

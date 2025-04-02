@@ -10,12 +10,6 @@
     "font_family": null,
     "font_color": null
   },
-  "kanban": {
-    "access_control": {
-      "is_public": false,
-      "required_roles": []
-    }
-  },
   "home": {
     "access_control": {
       "is_public": false,
@@ -39,9 +33,9 @@
         {
           "target_id": "496d0bf4-50e5-4228-8d9e-77575dc748d0",
           "target_type": "scripts",
-          "type": "hooks:finished",
+          "type": "task",
           "id": "0kx4179",
-          "condition_value": null
+          "task_type": "intercom_new_message"
         }
       ]
     }
@@ -54,16 +48,30 @@
       "title": "Classify Tickets",
       "is_initial": false,
       "workflow_position": [
-        -315,
-        0
+        -345,
+        120
       ],
       "transitions": [
         {
-          "target_id": "b65d5f87-cd6c-41d9-b190-8c9122ec9eeb",
-          "target_type": "conditions",
-          "type": "scripts:finished",
-          "id": "176v7go",
-          "condition_value": null
+          "target_id": "d4ca44ea-8e06-4968-92af-b45b659d6e9d",
+          "target_type": "scripts",
+          "type": "task",
+          "id": "6wpcqg9",
+          "task_type": "Sales"
+        },
+        {
+          "target_id": "7063e157-96e6-47ba-a864-a8f814ab1d9c",
+          "target_type": "scripts",
+          "type": "task",
+          "id": "6wogvt0",
+          "task_type": "Finance"
+        },
+        {
+          "target_id": "0e162ab9-e338-48fa-8fe5-310a9ea60257",
+          "target_type": "scripts",
+          "type": "task",
+          "id": "tqd744l",
+          "task_type": "Support"
         }
       ]
     },
@@ -73,16 +81,16 @@
       "title": "Classify Support Level",
       "is_initial": false,
       "workflow_position": [
-        45,
-        135
+        0,
+        120
       ],
       "transitions": [
         {
           "target_id": "78e6e4d1-ab57-448f-96c8-60ebb7e40f8c",
           "target_type": "scripts",
-          "type": "scripts:finished",
+          "type": "task",
           "id": "l6vvaza",
-          "condition_value": null
+          "task_type": "triaged_conversation"
         }
       ]
     },
@@ -103,7 +111,7 @@
       "title": "Add Finance Tickets to ERP",
       "is_initial": false,
       "workflow_position": [
-        -30,
+        -15,
         315
       ],
       "transitions": []
@@ -115,15 +123,15 @@
       "is_initial": false,
       "workflow_position": [
         390,
-        135
+        120
       ],
       "transitions": [
         {
           "target_id": "762996b0-0d85-4413-9844-17f8b609541d",
           "target_type": "scripts",
-          "type": "scripts:finished",
+          "type": "task",
           "id": "4zo3lrj",
-          "condition_value": null
+          "task_type": "ticket"
         }
       ]
     },
@@ -134,53 +142,12 @@
       "is_initial": false,
       "workflow_position": [
         780,
-        135
+        120
       ],
       "transitions": []
     }
   ],
-  "iterators": [],
-  "conditions": [
-    {
-      "id": "b65d5f87-cd6c-41d9-b190-8c9122ec9eeb",
-      "variable_name": "area",
-      "workflow_position": [
-        -210,
-        135
-      ],
-      "transitions": [
-        {
-          "target_id": "0e162ab9-e338-48fa-8fe5-310a9ea60257",
-          "target_type": "scripts",
-          "type": "conditions:patternMatched",
-          "id": "wa9pv41",
-          "condition_value": "Support"
-        },
-        {
-          "target_id": "7063e157-96e6-47ba-a864-a8f814ab1d9c",
-          "target_type": "scripts",
-          "type": "conditions:patternMatched",
-          "id": "wqhra3c",
-          "condition_value": "Finance"
-        },
-        {
-          "target_id": "d4ca44ea-8e06-4968-92af-b45b659d6e9d",
-          "target_type": "scripts",
-          "type": "conditions:patternMatched",
-          "id": "txgyifj",
-          "condition_value": "Sales"
-        }
-      ]
-    },
-    {
-      "id": "56759c0a-9f24-4b1b-9d27-32e229dcd797",
-      "variable_name": "topic",
-      "workflow_position": [
-        1455,
-        -405
-      ],
-      "transitions": []
-    }
-  ],
-  "version": "11.0"
+  "agents": [],
+  "clients": [],
+  "version": "13.0"
 }
