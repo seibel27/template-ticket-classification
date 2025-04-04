@@ -1,5 +1,5 @@
 import abstra.hooks as ah
-import abstra.workflows as aw
+from abstra.tasks import send_task
 
 
 def name_from_email(email: str):
@@ -26,6 +26,8 @@ if topic == 'conversation.user.created':
 
     if info['message'].endswith('</p>'):
         info['message'] = info['message'][:-4]
-        
-    aw.set_data("conversation", info)
-    aw.set_data("topic", "New_Conversation")
+
+    payload = {
+        "conversation_info": info,
+    }
+    send_task("intercom_new_message", payload)

@@ -1,7 +1,10 @@
-import abstra.workflows as aw
+from abstra.tasks import get_trigger_task, send_task
 from abstra.ai import prompt
 
-message = aw.get_data("conversation")["message"]
+task = get_trigger_task()
+payload = task.get_payload()
+conversation_info = payload["conversation_info"]
+message = conversation_info["message"]
 
 ans = prompt(f"""
 You are a member of the support team in a software development company. You are tasked with categorizing customer support requests into three levels of support: N1, N2, and N3. Here's what each level means:
@@ -33,4 +36,8 @@ format={
     "level": {"type": "string", "enum": ["N1", "N2", "N3"]}
 })
 
-aw.set_data("level", ans["level"])
+payload["level"] = ans['level'].capitalize()
+
+send_task("triaged_conversation", payload)
+
+task.complete()

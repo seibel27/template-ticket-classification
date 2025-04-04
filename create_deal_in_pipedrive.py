@@ -1,7 +1,9 @@
-import abstra.workflows as aw
+from abstra.tasks import get_trigger_task
 from pipedrive import *
 
-conversation_info = aw.get_data("conversation")
+task = get_trigger_task()
+payload = task.get_payload()
+conversation_info = payload["conversation_info"]
 
 existent_person = Person.retrieve_by(email=conversation_info["customer_email"])
 
@@ -17,7 +19,6 @@ else:
 
 person_id = person.id
 
-
 # Create Deal
 deal = Deal.create(
     title="Deal with " + conversation_info["customer_name"],
@@ -25,3 +26,5 @@ deal = Deal.create(
     pipeline_id=Deal.Pipeline.sales,
     stage_id=Deal.Stage.sales_mapped,
 )
+
+task.complete()

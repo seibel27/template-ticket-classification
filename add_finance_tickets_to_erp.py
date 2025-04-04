@@ -1,8 +1,10 @@
-import abstra.workflows as aw
+from abstra.tasks import get_trigger_task
 import abstra.tables as at
 
-conversation_info = aw.get_data("conversation")
-priority = aw.get_data("priority")
+task = get_trigger_task()
+payload = task.get_payload()
+conversation_info = payload["conversation_info"]
+priority = payload["priority"]
 
 at.insert(
     "erp",
@@ -13,4 +15,5 @@ at.insert(
         "user_message": conversation_info["message"],
         "priority": priority
     }
-)
+) 
+task.complete()
